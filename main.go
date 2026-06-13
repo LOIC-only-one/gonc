@@ -11,10 +11,9 @@ import (
 func argsHandler() (string, string, []string) {
 	host := flag.String("host", "localhost", "Hôte du serveur")
 	portsStr := flag.String("port", "8080", "Liste des ports séparés par des virgules (ex: 8080,8081,9000)")
+	datatype := flag.String("data", "tcp", "TCP/UDP")
 	flag.Parse()
 	portsList := strings.Split(*portsStr, ",")
-	datatype := flag.String("data", "tcp", "TCP/UDP")
-
 	return *datatype, *host, portsList
 }
 
