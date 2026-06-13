@@ -29,12 +29,12 @@ go build
 Utilisation
 Syntaxe
 ```bash
-gonc.exe -host <target> -port <port1,port2,port3>
+gonc.exe -host <target> -port <port1,port2,port3> -data <tcp/udp>
 ```
 
 Exemple
 ```bash
-.\gonc.exe -host google.com -port 80,443,22
+.\gonc.exe -host google.com -port 80,443,22 -data tcp
 Exemple de sortie
 OK - google.com:443 took 32ms
 OK - google.com:80 took 45ms
@@ -43,19 +43,17 @@ Error connecting: dial tcp ... connection refused
 
 Principe technique
 L’outil repose sur :
-- net.Dial() pour établir une connexion TCP
+- net.Dial() pour établir une connexion TCP/UDP
 - time.Now() / time.Since() pour mesurer la latence
 - flag pour la gestion des arguments CLI
 - strings.Split() pour gérer plusieurs ports
 
 Limitations
-- TCP uniquement (pas de scan UDP)
 - Pas de timeout personnalisé (peut bloquer sur certains ports filtrés)
 - Ne vérifie pas la réponse applicative, seulement la connexion TCP
 
 Améliorations possibles
 - Ajout de goroutines pour scan parallèle
 - Ajout d’un timeout configurable
-- Mode serveur (net.Listen) type netcat
 - Affichage formaté (table, JSON)
 - Détection de services (banner grabbing)
